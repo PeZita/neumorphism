@@ -11,6 +11,7 @@ SyntaxHighlighter.registerLanguage('css', css)
 const Configuration = ({ previewBox, activeLightSource = 1 }) => {
   const [blur, setBlur] = useState(60)
   const [color, setColor] = useState(getColorFromRoute() || '#e0e0e0')
+  const [backgroundColor, setBackgroundColor] = useState(getColorFromRoute() || '#2e2e2e')
   const [size, setSize] = useState(300)
   const [radius, setRadius] = useState(50)
   const [shape, setShape] = useState(0)
@@ -23,6 +24,8 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
   const codeContainer = useRef()
   const code = useRef()
   const colorInput = useRef()
+  const backgroundColorInput = useRef()
+
   const theme = useRef(false)
 
   const colorOnChange = ({ target: { value } }) => {
@@ -31,9 +34,20 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
     }
   }
 
+  const backgroundColorOnChange = ({ target: { value } }) => {
+    if (isValidColor(value)) {
+      setBackgroundColor(value)
+    }
+  }
+
   const handleColor = e => {
     window.history.replaceState('homepage', 'Title', '/' + e.target.value)
     setColor(e.target.value)
+  }
+
+  const handleBackground = e => {
+    window.history.replaceState('homepage', 'Title', '/' + e.target.value)
+    setBackgroundColor(e.target.value)
   }
 
   const copyToClipboard = e => {
@@ -86,8 +100,8 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
       return
     }
     let angle, positionX, positionY
-    const darkColor = colorLuminance(color, colorDifference * -1)
-    const lightColor = colorLuminance(color, colorDifference)
+    const darkColor = colorLuminance(backgroundColor, colorDifference * -1)
+    const lightColor = colorLuminance(backgroundColor, colorDifference)
 
     const firstGradientColor =
       gradient && shape !== 1 ? colorLuminance(color, shape === 3 ? 0.07 : -0.1) : color
@@ -124,6 +138,7 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
     }
 
     colorInput.current.value = color
+    backgroundColorInput.current.value = backgroundColor
 
     document.documentElement.style.cssText = `
       --positionX: ${positionX}px;
@@ -135,6 +150,7 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
       --textColor: ${getContrast(color)};
       --textColorOpposite: ${color};
       --baseColor: ${color};
+      --backgroundColor: ${backgroundColor};
       --darkColor: ${darkColor};
       --lightColor: ${lightColor};
       --firstGradientColor: ${firstGradientColor};
@@ -196,6 +212,28 @@ box-shadow: ${firstBoxShadow},
           id="colorInput"
           ref={colorInput}
           onChange={colorOnChange}
+        />
+      </div>
+      <div className="row">
+        <label htmlFor="color">Pick background:</label>
+        <input
+          type="color"
+          name="color"
+          onChange={handleBackground}
+          placeholder="#2e2e2e"
+          value={backgroundColor}
+          id="backgroundColor"
+        />
+        <label htmlFor="backgroundColorInput" style={{ paddingLeft: '10px' }}>
+          or
+        </label>
+        <input
+          type="text"
+          placeholder="#2e2e2e"
+          name="color"
+          id="backgroundColorInput"
+          ref={backgroundColorInput}
+          onChange={backgroundColorOnChange}
         />
       </div>
       <ConfigurationRow
