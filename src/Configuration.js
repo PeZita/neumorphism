@@ -100,8 +100,17 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
       return
     }
     let angle, positionX, positionY
-    const darkColor = colorLuminance(backgroundColor, colorDifference * -1)
-    const lightColor = colorLuminance(backgroundColor, colorDifference)
+    const darkShadow = colorLuminance(backgroundColor, colorDifference * -1)
+    const darkShadow1 = colorLuminance(backgroundColor, colorDifference * -0.9)
+    const darkShadow2 = colorLuminance(backgroundColor, colorDifference * -0.8)
+    const darkShadow3 = colorLuminance(backgroundColor, colorDifference * -0.7)
+    const darkShadow4 = colorLuminance(backgroundColor, colorDifference * -0.6)
+    const mediumShadow = colorLuminance(backgroundColor, colorDifference * -0.5)
+    const lightShadow4 = colorLuminance(backgroundColor, colorDifference * -0.4)
+    const lightShadow3 = colorLuminance(backgroundColor, colorDifference * -0.3)
+    const lightShadow2 = colorLuminance(backgroundColor, colorDifference * -0.2)
+    const lightShadow1 = colorLuminance(backgroundColor, colorDifference * -1)
+    const lightShadow = colorLuminance(backgroundColor, colorDifference)
 
     const firstGradientColor =
       gradient && shape !== 1 ? colorLuminance(color, shape === 3 ? 0.07 : -0.1) : color
@@ -151,8 +160,17 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
       --textColorOpposite: ${color};
       --baseColor: ${color};
       --backgroundColor: ${backgroundColor};
-      --darkColor: ${darkColor};
-      --lightColor: ${lightColor};
+      --darkShadow: ${darkShadow};
+      --darkShadow1: ${darkShadow1};
+      --darkShadow2: ${darkShadow2};
+      --darkShadow3: ${darkShadow3};
+      --darkShadow4: ${darkShadow4};
+      --mediumShadow: ${mediumShadow};
+      --lightShadow1: ${lightShadow1};
+      --lightShadow2: ${lightShadow2};
+      --lightShadow3: ${lightShadow3};
+      --lightShadow4: ${lightShadow4};
+      --lightShadow: ${lightShadow};
       --firstGradientColor: ${firstGradientColor};
       --secondGradientColor: ${secondGradientColor};
       --size: ${size}px;
@@ -178,17 +196,66 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
         ? `linear-gradient(${angle}deg, ${firstGradientColor}, ${secondGradientColor})`
         : `${color}`
     const boxShadowPosition = shape === 1 ? 'inset' : ''
-    const firstBoxShadow = `${boxShadowPosition} ${positionX}px ${positionY}px ${blur}px ${darkColor}`
-    const secondBoxShadow = `${boxShadowPosition} ${positionX * -1}px ${
+    const darkBoxShadow = `${boxShadowPosition} ${positionX}px ${positionY}px ${blur}px ${darkShadow}`
+    const darkBoxShadow1 = `${boxShadowPosition} ${positionX * 0.8}px ${
+      positionY * 0.8
+    }px ${blur}px ${darkShadow1}`
+    const darkBoxShadow2 = `${boxShadowPosition} ${positionX * 0.6}px ${
+      positionY * 0.6
+    }px ${blur}px ${darkShadow2}`
+    const darkBoxShadow3 = `${boxShadowPosition} ${positionX * 0.4}px ${
+      positionY * 0.4
+    }px ${blur}px ${darkShadow3}`
+    const darkBoxShadow4 = `${boxShadowPosition} ${positionX * 0.2}px ${
+      positionY * 0.2
+    }px ${blur}px ${darkShadow4}`
+    const mediumBoxShadow = `${boxShadowPosition} ${positionX * 0}px ${
+      positionY * 0
+    }px ${blur}px ${mediumShadow}`
+    const lightBoxShadow4 = `${boxShadowPosition} ${positionX * -0.2}px ${
+      positionY * -0.2
+    }px ${blur}px ${lightShadow4}`
+    const lightBoxShadow3 = `${boxShadowPosition} ${positionX * -0.4}px ${
+      positionY * -0.4
+    }px ${blur}px ${lightShadow3}`
+    const lightBoxShadow2 = `${boxShadowPosition} ${positionX * -0.6}px ${
+      positionY * -0.6
+    }px ${blur}px ${lightShadow2}`
+    const lightBoxShadow1 = `${boxShadowPosition} ${positionX * -0.8}px ${
+      positionY * -0.8
+    }px ${blur}px ${lightShadow4}`
+    const lightBoxShadow = `${boxShadowPosition} ${positionX * -1}px ${
       positionY * -1
-    }px ${blur}px ${lightColor};`
+    }px ${blur}px ${lightShadow}`
 
     setCodeString(
       `border-radius: ${borderRadius};
 background: ${background};
-box-shadow: ${firstBoxShadow},
-            ${secondBoxShadow}`
+box-shadow: ${darkBoxShadow},
+            ${darkBoxShadow1},
+            ${darkBoxShadow2},
+            ${darkBoxShadow3},
+            ${darkBoxShadow4},
+            ${mediumBoxShadow},
+            ${lightBoxShadow4},
+            ${lightBoxShadow3},
+            ${lightBoxShadow2},
+            ${lightBoxShadow1},
+            ${lightBoxShadow};`
     )
+    document.documentElement.style.cssText =
+      document.documentElement.style.cssText +
+      `--box-shadow: ${darkBoxShadow},
+                    ${darkBoxShadow1},
+                    ${darkBoxShadow2},
+                    ${darkBoxShadow3},
+                    ${darkBoxShadow4},
+                    ${mediumBoxShadow},
+                    ${lightBoxShadow4},
+                    ${lightBoxShadow3},
+                    ${lightBoxShadow2},
+                    ${lightBoxShadow1},
+                    ${lightBoxShadow};`
   })
   return (
     <div className="configuration soft-shadow">
@@ -279,7 +346,7 @@ box-shadow: ${firstBoxShadow},
       />
       <ShapeSwitcher shape={shape} setShape={handleShape} />
       <div className={`code-block ${theme.current ? '' : 'small'}`} ref={code}>
-        <button className="copy" onClick={copyToClipboard}>
+        <button className="copy" onclick={copyToClipboard}>
           Copy
         </button>
         <SyntaxHighlighter language="css" style={theme.current ? Dark : Light}>

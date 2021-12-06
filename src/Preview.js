@@ -21,7 +21,7 @@ const Preview = ({ previewBox, setActiveLightSource }) => {
         right="0"
         left="unset"
         data-value="2"
-        onClick={setLightSource}
+        onclick={setLightSource}
         className="light-source"
       ></LightSource>
       <LightSource
@@ -30,7 +30,7 @@ const Preview = ({ previewBox, setActiveLightSource }) => {
         right="unset"
         left="0"
         data-value="1"
-        onClick={setLightSource}
+        onclick={setLightSource}
         className="light-source active"
       ></LightSource>
       <LightSource
@@ -39,7 +39,7 @@ const Preview = ({ previewBox, setActiveLightSource }) => {
         right="0"
         left="unset"
         data-value="3"
-        onClick={setLightSource}
+        onclick={setLightSource}
         className="light-source"
       ></LightSource>
       <LightSource
@@ -48,7 +48,7 @@ const Preview = ({ previewBox, setActiveLightSource }) => {
         right="unset"
         left="0"
         data-value="4"
-        onClick={setLightSource}
+        onclick={setLightSource}
         className="light-source"
       ></LightSource>
       <div ref={previewBox} className="soft-element soft-shadow"></div>
