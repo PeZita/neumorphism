@@ -197,41 +197,41 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
         : `${color}`
     const boxShadowPosition = shape === 1 ? 'inset' : ''
     const darkBoxShadow = `${boxShadowPosition} ${positionX}px ${positionY}px ${blur}px ${darkShadow}`
-    const darkBoxShadow1 = `${boxShadowPosition} ${positionX * 0.8}px ${
+    const darkBoxShadow1 = `${boxShadowPosition} ${(positionX * 0.8).toFixed(2)}px ${(
       positionY * 0.8
-    }px ${blur}px ${darkShadow1}`
-    const darkBoxShadow2 = `${boxShadowPosition} ${positionX * 0.6}px ${
+    ).toFixed(2)}px ${blur}px ${darkShadow1}`
+    const darkBoxShadow2 = `${boxShadowPosition} ${(positionX * 0.6).toFixed(2)}px ${(
       positionY * 0.6
-    }px ${blur}px ${darkShadow2}`
-    const darkBoxShadow3 = `${boxShadowPosition} ${positionX * 0.4}px ${
+    ).toFixed(2)}px ${blur}px ${darkShadow2}`
+    const darkBoxShadow3 = `${boxShadowPosition} ${(positionX * 0.4).toFixed(2)}px ${(
       positionY * 0.4
-    }px ${blur}px ${darkShadow3}`
-    const darkBoxShadow4 = `${boxShadowPosition} ${positionX * 0.2}px ${
+    ).toFixed(2)}px ${blur}px ${darkShadow3}`
+    const darkBoxShadow4 = `${boxShadowPosition} ${(positionX * 0.2).toFixed(2)}px ${(
       positionY * 0.2
-    }px ${blur}px ${darkShadow4}`
-    const mediumBoxShadow = `${boxShadowPosition} ${positionX * 0}px ${
+    ).toFixed(2)}px ${blur}px ${darkShadow4}`
+    const mediumBoxShadow = `${boxShadowPosition} ${(positionX * 0).toFixed(2)}px ${(
       positionY * 0
-    }px ${blur}px ${mediumShadow}`
-    const lightBoxShadow4 = `${boxShadowPosition} ${positionX * -0.2}px ${
+    ).toFixed(2)}px ${blur}px ${mediumShadow}`
+    const lightBoxShadow4 = `${boxShadowPosition} ${(positionX * -0.2).toFixed(2)}px ${(
       positionY * -0.2
-    }px ${blur}px ${lightShadow4}`
-    const lightBoxShadow3 = `${boxShadowPosition} ${positionX * -0.4}px ${
+    ).toFixed(2)}px ${blur}px ${lightShadow4}`
+    const lightBoxShadow3 = `${boxShadowPosition} ${(positionX * -0.4).toFixed(2)}px ${(
       positionY * -0.4
-    }px ${blur}px ${lightShadow3}`
-    const lightBoxShadow2 = `${boxShadowPosition} ${positionX * -0.6}px ${
+    ).toFixed(2)}px ${blur}px ${lightShadow3}`
+    const lightBoxShadow2 = `${boxShadowPosition} ${(positionX * -0.6).toFixed(2)}px ${(
       positionY * -0.6
-    }px ${blur}px ${lightShadow2}`
-    const lightBoxShadow1 = `${boxShadowPosition} ${positionX * -0.8}px ${
+    ).toFixed(2)}px ${blur}px ${lightShadow2}`
+    const lightBoxShadow1 = `${boxShadowPosition} ${(positionX * -0.8).toFixed(2)}px ${(
       positionY * -0.8
-    }px ${blur}px ${lightShadow4}`
-    const lightBoxShadow = `${boxShadowPosition} ${positionX * -1}px ${
+    ).toFixed(2)}px ${blur}px ${lightShadow4}`
+    const lightBoxShadow = `${boxShadowPosition} ${(positionX * -1).toFixed(2)}px ${(
       positionY * -1
-    }px ${blur}px ${lightShadow}`
+    ).toFixed(2)}px ${blur}px ${lightShadow}`
 
     setCodeString(
       `border-radius: ${borderRadius};
 background: ${background};
-box-shadow: ${darkBoxShadow},
+box-shadow-full: ${darkBoxShadow},
             ${darkBoxShadow1},
             ${darkBoxShadow2},
             ${darkBoxShadow3},
@@ -241,11 +241,15 @@ box-shadow: ${darkBoxShadow},
             ${lightBoxShadow3},
             ${lightBoxShadow2},
             ${lightBoxShadow1},
+            ${lightBoxShadow};
+box-shadow: ${darkBoxShadow},
+            ${darkBoxShadow3},
+            ${lightBoxShadow3},
             ${lightBoxShadow};`
     )
     document.documentElement.style.cssText =
       document.documentElement.style.cssText +
-      `--box-shadow: ${darkBoxShadow},
+      `--box-shadow-full: ${darkBoxShadow},
                     ${darkBoxShadow1},
                     ${darkBoxShadow2},
                     ${darkBoxShadow3},
@@ -255,6 +259,10 @@ box-shadow: ${darkBoxShadow},
                     ${lightBoxShadow3},
                     ${lightBoxShadow2},
                     ${lightBoxShadow1},
+                    ${lightBoxShadow};
+      --box-shadow: ${darkBoxShadow},
+                    ${darkBoxShadow3},
+                    ${lightBoxShadow3},
                     ${lightBoxShadow};`
   })
   return (
@@ -362,9 +370,9 @@ box-shadow: ${darkBoxShadow},
         className="link"
         target="_blank"
         rel="noopener"
-        onclick="getOutboundLink('https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6'); return true;"
+        onclick="getOutboundLink('https://neumorphism.io/#e0e0e0'); return true;"
       >
-        Read more about <b>Neumorphism</b>
+        Original project <b>Neumorphism</b>
       </a>
     </div>
   )
